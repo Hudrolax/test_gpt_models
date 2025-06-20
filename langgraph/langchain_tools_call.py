@@ -1,8 +1,8 @@
 # Этот модуль демонстрирует вызов моделью цепочки инструментов для достижения результата.
 
-from langchain_openai import ChatOpenAI
+from langchain.agents import AgentType, initialize_agent
 from langchain_core.tools import tool
-from langchain.agents import initialize_agent, AgentType
+from langchain_openai import ChatOpenAI
 
 
 @tool
