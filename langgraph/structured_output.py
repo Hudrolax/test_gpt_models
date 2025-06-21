@@ -12,10 +12,10 @@ chain = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 class Person(BaseModel):
     """Данные о человеке"""
 
-    name: Optional[str] = Field(..., description="Имя")
-    surname: Optional[str] = Field(..., description="Фамилия")
-    birth_date: Optional[datetime] = Field(description="Дата рождения")
-    preferences: Optional[str] = Field(description="Предпочтения человека")
+    name: Optional[str] = Field(None, description="Имя")
+    surname: Optional[str] = Field(None, description="Фамилия")
+    birth_date: Optional[datetime] = Field(None, description="Дата рождения")
+    preferences: Optional[str] = Field(None, description="Предпочтения человека")
 
 
 structured_llm = chain.with_structured_output(Person)
