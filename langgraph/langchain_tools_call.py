@@ -1,8 +1,8 @@
 # Этот модуль демонстрирует вызов моделью цепочки инструментов для достижения результата.
 
-from langchain_openai import ChatOpenAI
+from langchain.agents import AgentType, initialize_agent
 from langchain_core.tools import tool
-from langchain.agents import initialize_agent, AgentType
+from langchain_openai import ChatOpenAI
 
 
 @tool
@@ -23,13 +23,22 @@ def return_prepared_answer(answer: int) -> str:
 tools = [add, multiply, return_prepared_answer]
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 
+# llm_with_tools = llm.bind_tools(tools)
+#
+# result = llm_with_tools.invoke(
+#     "Сколько будет (2+2)*5?"
+# )
+
 agent = initialize_agent(
     tools, 
     llm, 
     agent=AgentType.OPENAI_FUNCTIONS, 
-    verbose=True
+    verbose=False
 )
 
-result = agent.run("Сколько будет (2+2)*5?")
+result = agent.invoke(
+    input={'input': "Сколько будет (2+2)*5?"},
+    recursion_limit=25,
+)
 
 print('result:', result)

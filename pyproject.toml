@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=67", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "test_gpt_models"
+version = "2.0.0"
+description = "Testing AI tools"
+readme = "README.md"
+requires-python = ">=3.13"
+license = { text = "MIT" }
+authors = [
+  { name = "Hudrolax", email = "hudro795@gmail.com" }
+]
+
+dependencies = [
+  "langchain-openai==0.3.24",
+  "langchain==0.3.25",
+  "langgraph==0.4.8",
+  "langgraph-prebuilt==0.2.2",
+  "langchain-deepseek==0.1.3",
+  "langchain-ollama",
+]
+
+[tool.setuptools.packages.find]
+where = [""]
+exclude = ["tests*"]
+
+########################################
+# 7) Линтеры / форматтеры
+########################################
+[tool.ruff]
+line-length    = 120
+target-version = "py312"
+select         = ["E", "F", "I"]
+extend-select  = ["I"]
+src            = ["app"]
+
+[tool.black]
+line-length    = 120
+target-version = ["py312"]
+
+[tool.isort]
+profile = "black"
+line_length = 120
+lines_after_imports = 2
+sections = ["STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+force_sort_within_sections = true
+combine_as_imports = false
+default_section = "THIRDPARTY"
